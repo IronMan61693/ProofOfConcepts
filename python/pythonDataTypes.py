@@ -3,8 +3,8 @@
 def demonstrateValues(iterable):
     print(type(iterable))
     if type(iterable) == dict:
-        for value in iterable:
-            print(value," <- key ", iterable[value] , "<- value")
+        for key in iterable:
+            print(key," <- key ", iterable[key] , "<- value")
     else:
         for value in iterable:
             print(value)

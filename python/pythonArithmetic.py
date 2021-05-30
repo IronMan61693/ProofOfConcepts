@@ -17,6 +17,9 @@ def badFunc(x, y, z):
 def main():
     print(mathFunc(8,6,4))
     print(badFunc(8,6,4))
+    y = 1.0
+    x = int(y)
+    print(type(x))
 
 
 main()
