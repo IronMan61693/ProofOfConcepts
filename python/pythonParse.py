@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 import sys
 
+
 def parseFunction():
     list_of_args = sys.argv
     intArray = []
@@ -11,9 +12,11 @@ def parseFunction():
 
     for helpCheck in list_of_args:
         if helpCheck == "--help" or helpCheck == "-h":
-            print("This goes through any arguments you have added in the command"
-            ," line and sorts them into integers and everything else and prints those"
-            ," as lists, so there really isn't bad input. Have fun!")
+            print(
+                "This goes through any arguments you have added in the command",
+                " line and sorts them into integers and everything else and prints those",
+                " as lists, so there really isn't bad input. Have fun!",
+            )
             return ("", "")
 
     for argument in list_of_args:
@@ -24,6 +27,7 @@ def parseFunction():
         except:
             strArray.append(argument)
     return intArray, strArray
+
 
 # This is now an array of the arguments passed on the commandline
 
@@ -40,4 +44,5 @@ def main():
         print(strExample)
 
 
-main()
+if __name__ == "__main__":
+    main()

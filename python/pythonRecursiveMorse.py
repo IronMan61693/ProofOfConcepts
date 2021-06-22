@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 
+
 def main():
 
     morseDict = {}
@@ -34,7 +35,7 @@ def main():
     test = "11001"
 
     wordsDict = {}
-    morseWordFunc (test, "", 0, morseDict, wordsDict)
+    morseWordFunc(test, "", 0, morseDict, wordsDict)
     for word in wordsDict:
         print(word)
 
@@ -42,22 +43,24 @@ def main():
 def morseWordFunc(binString, ansString, binIndex, morseDict, wordsDict):
     length = len(binString)
     if binIndex == len(binString):
-        wordsDict[ansString] =1
-    if binIndex +3 < len(binString):
-        if binString[binIndex:binIndex+4] in morseDict:
-            newString = ansString + morseDict[binString[binIndex:binIndex+4]]
-            morseWordFunc(binString, newString, binIndex+4, morseDict, wordsDict)
-    if binIndex +2 < len(binString):
-        if binString[binIndex:binIndex+3] in morseDict:
-            newString = ansString + morseDict[binString[binIndex:binIndex+3]]
-            morseWordFunc(binString, newString, binIndex+3, morseDict, wordsDict)
-    if binIndex +1 < len(binString):
-        if binString[binIndex:binIndex+2] in morseDict:
-            newString = ansString + morseDict[binString[binIndex:binIndex+2]]
-            morseWordFunc(binString, newString, binIndex+2, morseDict, wordsDict)
-    if binIndex +0 < len(binString):
-        if binString[binIndex:binIndex+1] in morseDict:
-            newString = ansString + morseDict[binString[binIndex:binIndex+1]]
-            morseWordFunc(binString, newString, binIndex+1, morseDict, wordsDict)
+        wordsDict[ansString] = 1
+    if binIndex + 3 < len(binString):
+        if binString[binIndex : binIndex + 4] in morseDict:
+            newString = ansString + morseDict[binString[binIndex : binIndex + 4]]
+            morseWordFunc(binString, newString, binIndex + 4, morseDict, wordsDict)
+    if binIndex + 2 < len(binString):
+        if binString[binIndex : binIndex + 3] in morseDict:
+            newString = ansString + morseDict[binString[binIndex : binIndex + 3]]
+            morseWordFunc(binString, newString, binIndex + 3, morseDict, wordsDict)
+    if binIndex + 1 < len(binString):
+        if binString[binIndex : binIndex + 2] in morseDict:
+            newString = ansString + morseDict[binString[binIndex : binIndex + 2]]
+            morseWordFunc(binString, newString, binIndex + 2, morseDict, wordsDict)
+    if binIndex + 0 < len(binString):
+        if binString[binIndex : binIndex + 1] in morseDict:
+            newString = ansString + morseDict[binString[binIndex : binIndex + 1]]
+            morseWordFunc(binString, newString, binIndex + 1, morseDict, wordsDict)
 
-main()
+
+if __name__ == "__main__":
+    main()
