@@ -1,54 +1,74 @@
 #include <stdlib.h>
 #include <stdio.h>
 
+// Note to self, increase size of data by 1, insert at from char for data type
+// To be referenced when calling function for print
 struct node
   {
-    int intInfo;
+    // Using a pointer to allow for storing any data type
+    void *data;
 	  struct node* nextNode;
   };
 
+// Initializing as a global the last node (used for tracking the list)
 struct node* last = NULL;
 
-void insertAtFront(int intData)
-  {
-    struct node* temp;
-	  temp = (struct node*)malloc(sizeof(struct node));
 
+void insertAtFront(void *new_data, size_t new_data_size)
+// As the name suggests, expects pointer to data and the data's size
+  {
+    struct node* temp = (struct node*)malloc(sizeof(struct node));
+
+    temp->data = malloc(data_size);
   	// If empty
   	if (last == NULL)
   	  {
-  	    temp->intInfo = intData;
     		temp->nextNode = temp;
     		last = temp;
   	  }
   	else
   	  {
-  	    temp->intInfo = intData;
     		temp->nextNode = last->nextNode;
     		last->nextNode = temp;
   	  }
+    // Now copying data into allocated memory
+    int i;
+    for (i=0; i<data_size; i++)
+     {
+       // address allocated plus i spots assuming char is a size of 1, one char at a time
+       *(char *)(temp->data + i) = *(char *)(new_data + i)
+     }
   }
 
-void insertAtEnd (int intData)
+void insertAtEnd (void *new_data, size_t new_data_size)
+// As the name suggests, expects pointer to data and the data's size
   {
-    struct node* temp;
-	  temp = (struct node*)malloc(sizeof(struct node));
+    struct node* temp = (struct node*)malloc(sizeof(struct node));
 
+    temp->data = malloc(data_size);
   	// If empty
   	if (last == NULL)
   	  {
-  	    temp->intInfo = intData;
     		temp->nextNode = temp;
     		last = temp;
   	  }
   	else
   	  {
-  	    temp->intInfo = intData;
+    		temp->nextNode = last->nextNode;
     		last->nextNode = temp;
-    		last = temp;
+        // Just need to move last such that it is now temp
+        last = temp;
   	  }
+    // Now copying data into allocated memory
+    int i;
+    for (i=0; i<data_size; i++)
+     {
+       // address allocated plus i spots assuming char is a size of 1, one char at a time
+       *(char *)(temp->data + i) = *(char *)(new_data + i)
+     }
   }
 
+/* Will fix shortly
 void insertAtLocation (int location, int intData)
   {
     struct node* temp;
@@ -88,6 +108,7 @@ void insertAtLocation (int location, int intData)
 		    }
 	  }
   }
+*/
 
 void removeAtLocation(int location)
   {
@@ -130,7 +151,8 @@ void removeAtLocation(int location)
 	  }
   }
 
-void printListData()
+void printListData(void (*fptr)(void *))
+// This let's us access functions for printing whatever the data type is
   {
     printf("Print Check\n");
   	if (last == NULL)
@@ -142,12 +164,29 @@ void printListData()
   	    printf("Start print \n");
     		struct node* temp;
     		temp = last->nextNode;
-    		do
+    		while (temp != NULL)
     		  {
-    		    printf("Data of current node %d \n", temp->intInfo);
+    		    printf("Data of current node ");
+            (*fptr)(temp->data);
+            printf("\n");
       			temp = temp->nextNode;
-    		  } while(temp != last->nextNode);
+    		  }
   	  }
+  }
+
+void printInt(void *n)
+  {
+    printf("%d", *(int *)n);
+  }
+
+void printFloat(void *f)
+  {
+    printf("%f", *(float *)f);
+  }
+
+void printFloat(void *f)
+  {
+    printf("%f", *(float *)f);
   }
 
 void cleanList()
